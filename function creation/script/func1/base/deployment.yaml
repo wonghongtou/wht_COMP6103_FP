@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: func1
+  labels:
+    function: func1
+  namespace: function
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      function: func1
+  template:
+    metadata:
+      labels:
+        function: func1
+    spec:
+      containers:
+      - name: func1
+        image: wonghongtou/forkingdog:latest
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        env:
+          - name: ARGS
+            value: '["nslookup", "www.google.com"]'

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $demo$
+  labels:
+    function: $demo$
+  namespace: function
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      function: $demo$
+  template:
+    metadata:
+      labels:
+        function: $demo$
+    spec:
+      containers:
+      - name: $demo$
+        image: $image$
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        env:
+          - name: ARGS
+            value: $ExecutionArgs$

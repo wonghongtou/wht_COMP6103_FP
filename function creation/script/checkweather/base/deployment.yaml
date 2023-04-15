@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkweather
+  labels:
+    function: checkweather
+  namespace: function
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      function: checkweather
+  template:
+    metadata:
+      labels:
+        function: checkweather
+    spec:
+      containers:
+      - name: checkweather
+        image: wonghongtou/forkingdog-checkweather:0.1
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        env:
+          - name: ARGS
+            value: '["python", "./app/func/get-macau-weather.py"]'

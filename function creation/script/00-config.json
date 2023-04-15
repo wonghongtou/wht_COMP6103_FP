@@ -1,0 +1,5 @@
+{
+    "FunctionName": "checkweather",
+    "Image": "wonghongtou/forkingdog-checkweather:0.1",
+    "ExecutionArgs": ["python", "./app/func/get-macau-weather.py"]
+}
