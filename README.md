@@ -55,9 +55,9 @@ Inside the folder `function creation\script`, there are 5 scripts availabe for m
 
 ### Self develop python script (Build image)
 
-For some more sophiscate scenario, we need to run our own code as a function, this step will guide you how to build your own image and deploy it as a function on the `G2-faas` platform.
+For some more sophiscate scenario,it may be nessessary to run your own code as a function, this guide will show you how to build your own image and deploy it as a function on the `G2-faas` platform.
 
-1. Prepare your own code and the dependency requirement file, and save them into a folder `func`, the folder structure could reference `function creation\self-image\get-weather`, and should be same as the following.
+1. Prepare your own code and the dependency requirements file, and save them into a folder call `func`, the folder structure could reference the demo function `function creation\self-image\get-weather`, and should be same as the following.
    ```
     YourCodeFolder/
     ├─ func/
@@ -65,19 +65,19 @@ For some more sophiscate scenario, we need to run our own code as a function, th
     │  ├─ YourCode.py
     ├─ Dockerfile
    ```
-2. Prepare the `Dockerfile` as following
+2. Create the `Dockerfile` as following
     ```dockerfile
     FROM wonghongtou/forkingdog:latest
     COPY ./func/ ./app/func/
     RUN pip install -r ./app/func/requirements.txt
     ENV ARGS '["python", "./app/func/YourCode.py"]'
     ```
-3. build and deploy the docker image.
+3. Build and deploy the docker image.
    ```shell
    docker image build -t yourrepo/forkingdog-yourfuction:0.1 . --no-cache
    docker push yourrepo/forkingdog-yourfunction:0.1
    ```
-4. do the steps same as [simple-command](#simple-command), but configure the `00-config.json` as following
+4. Follow the steps in [simple-command](#simple-command), but configure the `00-config.json` as following
     ```json
     {
         "FunctionName": "YourFunction",
@@ -85,3 +85,4 @@ For some more sophiscate scenario, we need to run our own code as a function, th
         "ExecutionArgs": ["python", "./app/func/YourCode.py"]
     }
     ```
+> make any necessary adjustments to the working as needed.
